@@ -58,14 +58,19 @@ export default function MyRecipes({ favorites = false }: MyRecipesProps) {
 
   // Fetch user's recipes
   const recipesQuery = useQuery({
-    queryKey: ['/api/my-recipes', page],
+    queryKey: [favorites ? '/api/my-favorites' : '/api/my-recipes', page],
     queryFn: async () => {
       const response = await fetch('/api/auth/me');
       if (!response.ok) throw new Error('Failed to fetch user');
       
       const user = await response.json();
-      const recipesResponse = await fetch(`/api/users/${user.id}/recipes?page=${page}&limit=${pageSize}`);
-      if (!recipesResponse.ok) throw new Error('Failed to fetch recipes');
+      
+      const endpoint = favorites
+        ? `/api/users/${user.id}/favorites?page=${page}&limit=${pageSize}`
+        : `/api/users/${user.id}/recipes?page=${page}&limit=${pageSize}`;
+        
+      const recipesResponse = await fetch(endpoint);
+      if (!recipesResponse.ok) throw new Error(`Failed to fetch ${favorites ? 'favorites' : 'recipes'}`);
       
       return recipesResponse.json();
     },
@@ -80,7 +85,7 @@ export default function MyRecipes({ favorites = false }: MyRecipesProps) {
         title: "Receita excluída",
         description: "A receita foi excluída com sucesso.",
       });
-      queryClient.invalidateQueries({ queryKey: ['/api/my-recipes'] });
+      queryClient.invalidateQueries({ queryKey: [favorites ? '/api/my-favorites' : '/api/my-recipes'] });
       setIsDeleteDialogOpen(false);
     },
     onError: (error: Error) => {
@@ -114,7 +119,7 @@ export default function MyRecipes({ favorites = false }: MyRecipesProps) {
   };
 
   const handleFormSuccess = () => {
-    queryClient.invalidateQueries({ queryKey: ['/api/my-recipes'] });
+    queryClient.invalidateQueries({ queryKey: [favorites ? '/api/my-favorites' : '/api/my-recipes'] });
     setIsRecipeFormOpen(false);
   };
 
@@ -129,17 +134,23 @@ export default function MyRecipes({ favorites = false }: MyRecipesProps) {
       <Sidebar />
       
       <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-        <Header title="Minhas Receitas" />
+        <Header title={favorites ? "Receitas Favoritas" : "Minhas Receitas"} />
         
         <div className="mb-6 flex justify-between items-center">
-          <p className="text-gray-500">Gerencie suas receitas publicadas</p>
-          <Button 
-            onClick={handleNewRecipe} 
-            className="gradient-btn text-white flex items-center gap-2"
-          >
-            <Plus className="h-4 w-4" />
-            Nova Receita
-          </Button>
+          <p className="text-gray-500">
+            {favorites 
+              ? "Receitas que você salvou como favoritas" 
+              : "Gerencie suas receitas publicadas"}
+          </p>
+          {!favorites && (
+            <Button 
+              onClick={handleNewRecipe} 
+              className="gradient-btn text-white flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Nova Receita
+            </Button>
+          )}
         </div>
         
         {recipesQuery.isLoading ? (
