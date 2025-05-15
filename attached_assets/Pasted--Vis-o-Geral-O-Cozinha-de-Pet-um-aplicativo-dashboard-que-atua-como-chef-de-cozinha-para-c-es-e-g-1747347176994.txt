@@ -1,0 +1,81 @@
+# Visão Geral
+O Cozinha de Pet é um aplicativo dashboard que atua como chef de cozinha para cães e gatos, oferecendo planos de alimentação natural personalizados e uma rede social integrada para compartilhamento de receitas. O sistema é projetado com uma interface minimalista e moderna, utilizando o Shadcn como biblioteca de componentes.
+
+# Funcionalidades Principais
+
+## Autenticação e Cadastro de usuários
+- Só é possível acessar o sistema mediante login
+- Após login efetuado com sucesso, deve-se redirecionar o usuário a página principal de cada perfil
+- O perfil administrador poderá administrar todos os usuários, dados de pets, receitas
+- O perfil de usuário poderá administrar os dados previstos na composição do "Perfil do tutor"
+- Criar um usuário de testes para cada perfil
+
+## Master Pet (Rede Social)
+- Feed de receitas compartilhadas por donos de pets
+- Sistema de postagem de receitas com:
+  * Nome da receita
+  * Ingredientes
+  * Modo de preparo
+  * Tipo de preparo (Cozido/Crú)
+  * Foto do prato (implementaar upload de foto)
+  * Quando a receita não tiver uma foto, adicione um ícone que corresponda a categoria do alimento (carnes, peixes, aves, etc)
+  * Integração com vídeos do YouTube
+- Categorização por tipo de animal (Cães/Gatos)
+- Categorias de alimentos: Carnes, Aves, Peixes e Petiscos
+- Sistema de compartilhamento de receitas
+- Sistema de favoritos
+- Contador "Já fiz esta receita"
+- Sistema de seguidores entre perfis de Pets
+- Os usuários poderão deixar comentários nas receitas e deixar comentários para os comentários de outros usuários.
+
+## Perfil do Tutor
+- Gerenciamento de perfis de pets (usuário pode cadastrar 1 ou mais pets)
+- A lista de Pets cadastrados deve ter o formato de lista
+- foto de perfil (implementar upload de foto), Nome, e-mail, estado e cidade do tutor
+- Histórico de receitas publicadas
+- Receitas favoritadas
+- Implementar Edição de dados do perfil
+
+## Perfil do Pet
+- foto de perfil (implementar upload de foto), Nome do pet, tipo (Cães ou Gatos) raça, idade, peso (em kilogramas)
+- Implementar edição do perfil do Pet
+
+# Experiência do Usuário
+
+## Design System
+- Interface minimalista e clean
+- Paleta de cores:
+  * Roxo (#4D2096) - Cor principal
+  * Rosa (#FF00A8) - Cor secundária
+  * Verde (#1ABD75) - Cor terciária
+  * Azul Pastel (#A5C0DD) - Ações secundárias
+  * Cinza Claro (#F5F5F5) - Backgrounds
+  * Branco (#FFFFFF) - Elementos principais
+
+## Elementos Visuais
+- Efeitos de blur em overlays e fundos
+- Animações suaves nas transições
+- Cards com bordas arredondadas e sombreamento suave
+- Ícones modernos com destaque colorido para ações principais
+
+## Fluxo do sistema
+- Login e cadastro de usuário
+  * O usuário só consegue visualizar o sistema se efetuar o login
+- Master Pet (página principal após logado)
+  * Mostra um feed em formato de cards, com as receitas do Master Pet (receitas publicadas pelos usuários)
+  * Exibe um botão fixo flutuante, com ação de Postar minha receita
+  * Exibe o filtro tipo de Pet via componente de "select", com o label "Tipo de Pet"
+  * Exibe o filtro categorias via componente de "select", com o label "Categorias"
+  * Menu sidebar esquerdo com os menus: Master Pet (página principal), Minhas Receitas (CRUD de receitas publicadas pelo usuário), Perfil (perfil do tutor e os pets associados ao seu perfil), botão de "sair" (efetuar logoff) do sistema
+
+- Minhas Receitas
+  * Mostra a lista de receitas publicadas pelo usuário, em formato tabela, com ícones para as ações de CRUD (listar, visualizar detalhes, editar e deletar) receita
+  * Implementar edição dos dados da receita
+  * São mostradas até 25 receitas por página. Ao passar disto, deve ser mostrado uma paginação
+  * Deve-se mostrar um botão principal para o cadastro de novas receitas
+  * Não deve conter filtros de tipo de pet e nem categorias
+
+- Perfil
+  * O sistema deve permitir o cadastro de 1 ou mais pets para um tutor
+  * Uma aba para as receitas postadas (com botão para postar "nova receita"
+  * Uma aba para as receitas favoritadas (com um link para voltar ao feed)
