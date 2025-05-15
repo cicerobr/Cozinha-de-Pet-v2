@@ -176,10 +176,8 @@ export function RegisterForm() {
         
         <p className="text-center text-sm text-gray-500 mt-6">
           Já tem uma conta?{" "}
-          <Link href="/login">
-            <a className="font-medium text-primary hover:text-primary/80 transition-all">
-              Faça login
-            </a>
+          <Link href="/login" className="font-medium text-primary hover:text-primary/80 transition-all">
+            Faça login
           </Link>
         </p>
       </CardContent>
