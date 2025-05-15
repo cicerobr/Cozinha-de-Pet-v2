@@ -61,16 +61,18 @@ export function Sidebar({ className }: SidebarProps) {
       
       <nav className="flex-1 space-y-2">
         {routes.map((route) => (
-          <Link key={route.href} href={route.href}>
-            <a className={cn(
+          <Link 
+            key={route.href} 
+            href={route.href} 
+            className={cn(
               "flex items-center gap-3 p-3 rounded-lg transition-all",
               route.active 
                 ? "text-primary bg-primary/10" 
                 : "text-gray-600 hover:bg-primary/5"
-            )}>
-              <route.icon size={18} />
-              <span>{route.name}</span>
-            </a>
+            )}
+          >
+            <route.icon size={18} />
+            <span>{route.name}</span>
           </Link>
         ))}
       </nav>

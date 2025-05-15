@@ -11,8 +11,8 @@ interface RecipeFiltersProps {
 }
 
 export function RecipeFilters({ onFilterChange, onNewRecipe }: RecipeFiltersProps) {
-  const [petType, setPetType] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [petType, setPetType] = useState<string>("all");
+  const [category, setCategory] = useState<string>("all");
 
   const handlePetTypeChange = (value: string) => {
     setPetType(value);
@@ -34,7 +34,7 @@ export function RecipeFilters({ onFilterChange, onNewRecipe }: RecipeFiltersProp
               <SelectValue placeholder="Todos" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Todos</SelectItem>
+              <SelectItem value="all">Todos</SelectItem>
               {petTypeOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -51,7 +51,7 @@ export function RecipeFilters({ onFilterChange, onNewRecipe }: RecipeFiltersProp
               <SelectValue placeholder="Todas" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Todas</SelectItem>
+              <SelectItem value="all">Todas</SelectItem>
               {categoryOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
