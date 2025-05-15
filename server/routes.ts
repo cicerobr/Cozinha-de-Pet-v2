@@ -1,6 +1,6 @@
 import type { Express, Request, Response, NextFunction } from "express";
-import express from "express";
 import { createServer, type Server } from "http";
+import express from "express";
 import { storage } from "./storage";
 import { 
   insertUserSchema, 
@@ -15,8 +15,6 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import session from "express-session";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
 
 // Set up multer for file uploads
 const uploadDir = path.join(process.cwd(), "uploads");
