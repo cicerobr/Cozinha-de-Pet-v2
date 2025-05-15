@@ -91,7 +91,11 @@ export function RecipeForm({
       // Add form fields to FormData
       Object.entries(data).forEach(([key, value]) => {
         if (key !== "image") {
-          formData.append(key, value?.toString() || "");
+          if (key === "prepTime") {
+            formData.append(key, Number(value).toString());
+          } else {
+            formData.append(key, value?.toString() || "");
+          }
         }
       });
       

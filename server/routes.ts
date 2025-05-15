@@ -284,11 +284,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   app.post("/api/recipes", authenticate, upload.single("image"), async (req, res) => {
     try {
-      const recipeData = insertRecipeSchema.parse({
+      // Garantir que o prepTime seja um número
+      const formData = {
         ...req.body,
+        prepTime: req.body.prepTime ? parseInt(req.body.prepTime) : undefined,
         userId: req.user.id,
         imageUrl: req.file ? `/uploads/${req.file.filename}` : undefined
-      });
+      };
+      
+      const recipeData = insertRecipeSchema.parse(formData);
       
       const recipe = await storage.createRecipe(recipeData);
       res.status(201).json(recipe);
