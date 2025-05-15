@@ -214,7 +214,11 @@ export default function Profile() {
       
       Object.entries(data).forEach(([key, value]) => {
         if (value !== undefined && key !== 'profileImage') {
-          formData.append(key, value.toString());
+          if (key === 'age' || key === 'weight') {
+            formData.append(key, Number(value).toString());
+          } else {
+            formData.append(key, value.toString());
+          }
         }
       });
       

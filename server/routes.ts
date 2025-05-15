@@ -178,11 +178,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   app.post("/api/pets", authenticate, upload.single("profileImage"), async (req, res) => {
     try {
-      const petData = insertPetSchema.parse({
+      // Garantir que age e weight sejam números
+      const formData = {
         ...req.body,
+        age: req.body.age ? parseInt(req.body.age) : undefined,
+        weight: req.body.weight ? parseFloat(req.body.weight) : undefined,
         userId: req.user.id,
         profileImageUrl: req.file ? `/uploads/${req.file.filename}` : undefined
-      });
+      };
+      
+      const petData = insertPetSchema.parse(formData);
       
       const pet = await storage.createPet(petData);
       res.status(201).json(pet);
