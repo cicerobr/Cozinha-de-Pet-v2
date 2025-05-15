@@ -33,6 +33,12 @@ function Router() {
         </AuthRoute>
       </Route>
       
+      <Route path="/favorites">
+        <AuthRoute>
+          <MyRecipes favorites={true} />
+        </AuthRoute>
+      </Route>
+      
       <Route path="/profile">
         <AuthRoute>
           <Profile />

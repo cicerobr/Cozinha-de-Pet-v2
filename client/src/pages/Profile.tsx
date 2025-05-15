@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -141,7 +141,7 @@ export default function Profile() {
   });
 
   // Update form values when profile data is loaded
-  React.useEffect(() => {
+  useEffect(() => {
     if (profileQuery.data) {
       profileForm.reset({
         firstName: profileQuery.data.firstName || "",

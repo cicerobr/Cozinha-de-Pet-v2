@@ -43,7 +43,11 @@ import { apiRequest } from "@/lib/queryClient";
 import { queryClient } from "@/lib/queryClient";
 import { formatDate } from "@/lib/utils";
 
-export default function MyRecipes() {
+interface MyRecipesProps {
+  favorites?: boolean;
+}
+
+export default function MyRecipes({ favorites = false }: MyRecipesProps) {
   const [page, setPage] = useState(1);
   const [isRecipeFormOpen, setIsRecipeFormOpen] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
